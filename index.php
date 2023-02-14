@@ -1,5 +1,10 @@
 <?php
 include_once 'includes/dbh.inc.php';
+  // DELETE
+  if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $delete = mysqli_query($connect, "DELETE FROM `estate_agency` WHERE `id`='$id'");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +13,7 @@ include_once 'includes/dbh.inc.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <title>My house</title>
@@ -53,12 +58,9 @@ include_once 'includes/dbh.inc.php';
 
         <div class='cards d-flex  align-items-center justify-content-around flex-wrap'>
             <?php
-            // DELETE
-            if (isset($_GET['id'])) {
-                $id = $_GET['id'];
-                $delete = mysqli_query($connect, "DELETE FROM `estate_agency` WHERE `id`='$id'");
-            }// SELECT
-            else if (isset($_GET["advertisting"])&& !(isset($_POST["min"]) && isset($_POST["max"]))) {
+          
+            // SELECT
+            if (isset($_GET["advertisting"])&& !(isset($_POST["min"]) && isset($_POST["max"]))) {
                 $selected = $_GET["advertisting"];
                 $select = mysqli_query($connect, "SELECT * FROM `estate_agency` WHERE `advertisting`='$selected'");
                 include('./display.php');
